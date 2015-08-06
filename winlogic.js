@@ -17,35 +17,11 @@ Board.prototype.showPiece = function (row, col) {
 }
 
 Board.prototype.checkWin = function (row, col, colour) {
-	// if (r > 2) {  //do 'up' directions check
-	// 	if ((this.rows[r-1][c] == color) && 
-	// 		(this.rows[r-2][c] == color) && 
-	// 		(this.rows[r-3][c] == color))
-	// 		{
-	// 			return ("up")
-	// 		}
-
-	// 	if (c >2) { //do left check
-	// 	 	if ((this.rows[r-1][c-1] == color) && 
-	// 	 	(this.rows[r-2][c-2] == color) && 
-	// 	 	(this.rows[r-3][c-3] == color))
-	// 	 	{
-	// 	 		return ( "upleft")
-	// 		}
-	// 	}
-	// 	if (c <4) { //do right check
-	// 	 	if ((this.rows[r-1][c+1] == color) && 
-	// 	 	(this.rows[r-2][c+2] == color) && 
-	// 	 	(this.rows[r-3][c+3] == color))
-	// 	 	{
-	// 	 		return ( "upright")
-	// 		}
-	// 	}
-
-	// }   REFACTORED
+	
 	var resultsArray = new Array
 
-	var horizArray = []
+	//check horizontal win
+	var horizArray = new Array
 	for (var i = 0; i<7; i++){
 		horizArray.push(this.rows[row][i])
 	}
@@ -57,8 +33,8 @@ Board.prototype.checkWin = function (row, col, colour) {
 		console.log(resultsArray)
 	}
 
-
-	var vertArray = []
+	//check vertical win
+	var vertArray = new Array
 	for (var i = row; i<6; i++){
 		vertArray.push(this.rows[i][col])
 	}
@@ -70,8 +46,7 @@ Board.prototype.checkWin = function (row, col, colour) {
 		console.log(resultsArray)
 	}
 
-	var diagUpRight = []
-
+	var diagUpRight = new Array
 	//calculate the left base point on this diagonal
 	var startCol = col;
 	var startRow = row
@@ -79,18 +54,13 @@ Board.prototype.checkWin = function (row, col, colour) {
 		startCol --
 		startRow ++
 	}
-
 	var tempRow = startRow
-
-
 	for (i =startCol; i<7; i++) {
 		if (tempRow > -1) {
 			diagUpRight.push(this.rows[tempRow][i])
 			tempRow --
 		}
 	} 
-
-	console.log(diagUpRight)
 	homeCol = checkFourColours(diagUpRight, colour)
 	if (homeCol > -1) {
 		resultsArray.push(startRow)
@@ -99,6 +69,35 @@ Board.prototype.checkWin = function (row, col, colour) {
 		console.log(resultsArray)
 	}
 
+	var diagUpLeft = new Array
+
+	//calculate the right base point on this diagonal
+	startCol = col
+	startRow = row
+	while ((startCol < 6) && (startRow <5)) {
+		startCol ++
+		startRow ++
+	}
+	console.log(startRow + "" + startCol)
+
+	var tempRow = startRow
+	var tempCol = startCol
+	for (i =tempCol; i>-1; i--) {
+		if (tempRow > -1) {
+			console.log(tempRow + " " + i)
+			console.log(this.rows[tempRow][i])
+			diagUpLeft.push(this.rows[tempRow][i])
+			tempRow --
+		}
+	} 
+
+	homeCol = checkFourColours(diagUpRight, colour)
+	if (homeCol > -1) {
+		resultsArray.push(startRow)
+		resultsArray.push(startCol)
+		resultsArray.push("upLeft")
+		console.log(resultsArray)
+	}
 
 
 	function checkFourColours (inArray, colour) {

@@ -10,7 +10,11 @@ var Board = function (){
 	this.colour = "red"
 	this.gameScoreRed = 0;
 	this.gameScoreBlue = 0;
+	this.win = false
 };
+
+
+
 
 Board.prototype.newGame = function() {
 	for (i = 0; i< 7; i++) {
@@ -18,6 +22,9 @@ Board.prototype.newGame = function() {
 			this.rows[j][i] = null
 		}
 	}
+	this.redTurn = true
+	this.colour = "red"
+	this.win = false
 }
 
 
@@ -36,8 +43,14 @@ Board.prototype.playPiece = function(column) {
     	this.redTurn = true
     }
     this.rows[available][column] = this.colour
-    this.checkWin(available, column, this.colour)
+    endState = this.checkWin(available, column, this.colour)
+    if (endState != -1) {
+    	this.win = true
+    	console.log(endState)
+    }
+
 }
+
 
 
 Board.prototype.showPiece = function (row, col) {
@@ -145,6 +158,7 @@ Board.prototype.checkWin = function (row, col, colour) {
 		}
 		return -1
 	}
+	return homeCol
 }
 
 

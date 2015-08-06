@@ -16,33 +16,36 @@ Board.prototype.showPiece = function (row, col) {
 	console.log(this.rowsColumns[row,col])
 }
 
-board = new Board;
-
-for (i=0;i<6;i++) {
-	for (j=0; j<7; j++) {
-		board.addPiece(i,j,'....')
-	}
+Board.prototype.checkWin = function(row,col) {
+	return "upRight"	
 }
 
 
-board.addPiece(5,0,'blue')
-board.addPiece(5,1,'blue')
-board.addPiece(5,2,'blue')
-board.addPiece(5,3,'blue')
+function makeWinBoard() {
+	board = new Board;
+
+	for (i=0;i<6;i++) {
+		for (j=0; j<7; j++) {
+			board.addPiece(i,j,'....')
+		}
+	}
+
+	board.addPiece(5,0,'blue')
+	board.addPiece(5,1,'blue')
+	board.addPiece(5,2,'blue')
+	board.addPiece(5,3,'blue')
+	board.addPiece(4,1,'blue')
+	board.addPiece(4,2,'blue')
+	board.addPiece(3,1,'blue')
+	board.addPiece(2,1,'blue')
+	board.addPiece(3,2,'blue')
+	board.addPiece(2,3,'blue')
+	board.addPiece(2,0,'blue')
+};
 
 
-board.addPiece(4,1,'blue')
-board.addPiece(4,2,'blue')
-board.addPiece(3,1,'blue')
-board.addPiece(2,1,'blue')
-board.addPiece(3,2,'blue')
-board.addPiece(2,3,'blue')
-board.addPiece(2,0,'blue')
-
-
-
-
-
+makeWinBoard();
+console.log(board.checkWin(5,0))
 
 
 

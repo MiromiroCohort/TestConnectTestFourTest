@@ -1,0 +1,28 @@
+.cell {
+    float: left;
+    width: 13%;
+    padding-bottom : 13%;
+    background-position:center center;
+    background-repeat:no-repeat;
+    background-size:cover;
+    border: 1px solid;
+    background-color: black;
+}
+
+.red {
+  background-image: url('circle_red.png');
+}
+
+.blue {
+  background-image: url('circle_blue.png');
+}
+
+.null {
+  background-image: url('circle_white.png')
+}
+
+.row-0{}
+.row-1{}
+
+.col-0{}
+.col-1{}

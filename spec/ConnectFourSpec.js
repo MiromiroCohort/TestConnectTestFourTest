@@ -18,6 +18,6 @@ describe("ConnectFour", function(){
 	})
 
 	it("should register something within the column", function() {
-		expect(board.playPiece("blue", 1)).toEqual(board.rowsColumns[1][5] = "blue")
+		expect(board.board[5].length).toEqual(7)
 	});
 });

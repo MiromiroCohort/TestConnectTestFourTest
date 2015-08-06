@@ -1,27 +1,29 @@
-var Board = function(color, column) {
+var Board = function() {
 	var rows = new Array(6);
 		for (var i = 0; i < 6; i++) {
 		rows[i] = new Array(7);
 	this.board = rows;
-	this.color = color;
-	this.column = column;
+
 	};
 };
 
+	Board.prototype.addPiece = function(row, color) {
+		this.board[0][row] = color
+}
 
 Board.prototype.rowsColumns = function() {
-	console.log(this.board)
 }
 
 
-Board.prototype.playPiece = function() {
-	console.log(this.color)
-	console.log(this.column)
-	console.log(this.board)
-
-
+Board.prototype.playPiece = function(color, column) {
+	for (var i in this.board ) {
+		if (!this.board[i][column]) {
+			available = i
+		}
+	}
+	this.board[available][column] = color
 }
 
-board = new Board('blue', 1);
-board.rowsColumns();
-board.playPiece();
+board = new Board;
+
+

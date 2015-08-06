@@ -10,6 +10,10 @@
     background-image: url('circle_white.png')
 }
 
+.empty {
+  background-image: url('circle_white.png');
+}
+
 .red {
   background-image: url('circle_red.png');
 }
@@ -17,3 +21,5 @@
 .blue {
   background-image: url('circle_blue.png');
 }
+
+

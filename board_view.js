@@ -10,37 +10,16 @@ $( document ).ready(function(){
       var col = $( this ).attr('class').split(' ')[2].slice(-1);
       var colInt = parseInt(col)
       board.playPiece(colInt);
-    if(Board.colour == "blue"){
+    if(board.colour == "blue"){
       $( this ).toggleClass("blue")
     } else {
       $( this ).toggleClass("red")
     }
   })
 
-  if(Board.win == true){
-    alert(Board.colour + " wins!")
-  }
-
-  if(Board.win == true){
-
-    winnerString = board.colour + " wins!"
-
-    function loaded () {
-      document.getElementById("win-message").innerHTML = winnerString;
+  if(board.win == true){
+    if(board.colour == 'red')
+    $("<div>Red player you are the WINNER!!!</div>").dialog();
     }
-
-    $(function() {
-    $( "#win-message" ).dialog({
-      modal: true,
-      buttons: {
-        New Game: function() {
-          Board.newGame();
-          newBoard();
-          $( this ).dialog( "close" );
-        }
-      }
-    });
-  });
-  }
 
 });

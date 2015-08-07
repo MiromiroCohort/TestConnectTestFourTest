@@ -45,7 +45,6 @@ Board.prototype.playPiece = function(column) {
     endState = this.checkWin(available, column, this.colour)
     if (endState != -1) {
     	this.win = true
-    	console.log(endState)
     }
     return available;
 
@@ -129,7 +128,7 @@ Board.prototype.checkWin = function (row, col, colour) {
 		}
 	}
 
-	homeCol = checkFourColours(diagUpRight, colour)
+	homeCol = checkFourColours(diagUpLeft, colour)
 	if (homeCol > -1) {
 		resultsArray.push(startRow)
 		resultsArray.push(startCol)

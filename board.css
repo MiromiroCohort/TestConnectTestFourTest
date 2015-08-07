@@ -22,4 +22,6 @@
   background-image: url('circle_blue.png');
 }
 
-
+.win {
+  background-image: url('circle_win.png');
+}

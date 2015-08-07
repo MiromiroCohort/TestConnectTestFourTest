@@ -1,27 +1,68 @@
 $( document ).ready(function(){
 
-  var newBoard = function(){
-    $('.cell').toggleClass('empty')
+  String.prototype.capitalize = function() {
+      return this.charAt(0).toUpperCase() + this.slice(1);
   }
 
-
-  $('.cell').click(function(){
-      var col = $( this ).attr('class').split(' ')[2].slice(-1);
-      var colInt = parseInt(col)
-      var rowInt = board.playPiece(colInt);
-      var colClass = ".col-" + colInt;
-      var rowClass = ".row-" + rowInt;
+  var piecePlacementRender = function(clickedCell){
+    var col = $( clickedCell ).attr('class').split(' ')[2].slice(-1);
+    var colInt = parseInt(col)
+    var rowInt = board.playPiece(colInt);
+    var colClass = ".col-" + colInt;
+    var rowClass = ".row-" + rowInt;
     if(board.colour == "blue"){
       $( '.cell' + rowClass + colClass).addClass("blue")
     } else {
       $( '.cell' + rowClass + colClass).addClass("red")
     }
-    if(board.win == true){
-      if(board.colour == "blue"){
-        $("<div>Blue player, you are the WINNER!!!</div>").dialog();
-      }else{
-      $("<div>Red player, you are the WINNER!!!</div>").dialog();
-      }
+  };
+
+  var highlightWin = function(){
+    winClasses = board.winResult
+    console.log(board.winResult)
+    for(i in winClasses){
+      var rowClass = winClasses.shift();
+      var colClass = winClasses.shift();
+      console.log(rowClass)
+      $( '.cell' + rowClass + colClass ).removeClass("blue")
+      $( '.cell' + rowClass + colClass ).removeClass("red")
+      $( '.cell' + rowClass + colClass ).addClass("win")
     }
-  })
+  }
+
+  var winDialogue = function(){
+    if(board.win == true){
+      highlightWin();
+      winner = board.colour.capitalize();
+      swal({
+        title: "Congratulations!",
+        text: winner + " has won the game!",
+        type: "success",
+        showCancelButton: true,
+        confirmButtonColor: "#DD6B55",
+        confirmButtonText: "New Game",
+        cancelButtonText: "Go play outside",
+        closeOnConfirm: true,
+        closeOnCancel: false
+      },
+      function(isConfirm){
+        if (isConfirm) {
+            $(".cell").removeClass("blue")
+            $(".cell").removeClass("red")
+            board.newGame()
+        } else {
+          swal("Fine then.", "Go on. Bugger off.", "error");
+        }
+      });
+    };
+  }
+
+  $('.cell').click(function(){
+    piecePlacementRender(this);
+    winDialogue();
+  });
 });
+
+
+
+

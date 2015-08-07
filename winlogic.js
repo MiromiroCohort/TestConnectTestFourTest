@@ -9,7 +9,8 @@ var Board = function (){
 	this.colour = "red"
 	this.gameScoreRed = 0;
 	this.gameScoreBlue = 0;
-	this.win = false
+	this.win = false;
+	this.winResult = []
 };
 
 
@@ -45,7 +46,7 @@ Board.prototype.playPiece = function(column) {
     endState = this.checkWin(available, column, this.colour)
     if (endState != -1) {
     	this.win = true
-    	console.log(endState)
+    	//TO ADD SCORE
     }
     return available;
 
@@ -129,7 +130,7 @@ Board.prototype.checkWin = function (row, col, colour) {
 		}
 	}
 
-	homeCol = checkFourColours(diagUpRight, colour)
+	homeCol = checkFourColours(diagUpLeft, colour)
 	if (homeCol > -1) {
 		resultsArray.push(startRow)
 		resultsArray.push(startCol)
@@ -162,7 +163,67 @@ Board.prototype.checkWin = function (row, col, colour) {
 }
 
 
+function showResult(inArray) {
+	var winLine = []
+	var startRow = parseInt(inArray[0])
+	var startCol = parseInt(inArray[1])
+	var direction = inArray[2]
+	switch(direction) {
+	    case "down":
+	    	winLine.push(startRow)
+	    	winLine.push(startCol)
+	    	winLine.push(startRow +1)
+	    	winLine.push(startCol)
+	    	winLine.push(startRow +2)
+	    	winLine.push(startCol)
+	    	winLine.push(startRow +3)
+	    	winLine.push(startCol)
+	        break;
+	    case "right":
+	    	winLine.push(startRow)
+	    	winLine.push(startCol)
+	    	winLine.push(startRow)
+	    	winLine.push(startCol +1)
+	    	winLine.push(startRow)
+	    	winLine.push(startCol +2)
+	    	winLine.push(startRow)
+	    	winLine.push(startCol +3)
+	        break;
+	    case "upLeft":
+	    	winLine.push(startRow)
+	    	winLine.push(startCol)
+	    	winLine.push(startRow -1)
+	    	winLine.push(startCol -1)
+	    	winLine.push(startRow -2)
+	    	winLine.push(startCol -2)
+	    	winLine.push(startRow -3)
+	    	winLine.push(startCol -3)
+	    	break;
+	    case "upRight":
+	    	winLine.push(startRow)
+	    	winLine.push(startCol)
+	    	winLine.push(startRow -1)
+	    	winLine.push(startCol +1)
+	    	winLine.push(startRow -2)
+	    	winLine.push(startCol +2)
+	    	winLine.push(startRow -3)
+	    	winLine.push(startCol +3)
+	    	break;
+	}
+	return winLine;
+}
 
 
 
 board = new Board
+board.playPiece(0)
+board.playPiece(1)
+board.playPiece(0)
+board.playPiece(1)
+board.playPiece(0)
+board.playPiece(1)
+board.playPiece(0)
+
+
+
+

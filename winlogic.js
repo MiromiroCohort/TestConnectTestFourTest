@@ -46,6 +46,7 @@ Board.prototype.playPiece = function(column) {
     endState = this.checkWin(available, column, this.colour)
     if (endState != -1) {
     	this.win = true
+    	this.winResult = showResult(endState)
     }
     return available;
 

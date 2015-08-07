@@ -20,9 +20,9 @@ $( document ).ready(function(){
   var highlightWin = function(){
     winClasses = board.winResult
     console.log(board.winResult)
-    for(i in winClasses){
-      var rowClass = winClasses.shift();
-      var colClass = winClasses.shift();
+    for(i in winClasses + 1){
+      var rowClass = '.row-' + winClasses.shift();
+      var colClass = '.col-' + winClasses.shift();
       console.log(rowClass)
       $( '.cell' + rowClass + colClass ).removeClass("blue")
       $( '.cell' + rowClass + colClass ).removeClass("red")
@@ -49,6 +49,7 @@ $( document ).ready(function(){
         if (isConfirm) {
             $(".cell").removeClass("blue")
             $(".cell").removeClass("red")
+            $(".cell").removeClass("win")
             board.newGame()
         } else {
           swal("Fine then.", "Go on. Bugger off.", "error");

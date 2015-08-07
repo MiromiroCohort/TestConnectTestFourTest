@@ -5,42 +5,27 @@ $( document ).ready(function(){
   }
 
 
-
   $('.cell').click(function(){
       var col = $( this ).attr('class').split(' ')[2].slice(-1);
       var colInt = parseInt(col)
-      board.playPiece(colInt);
-    if(Board.colour == "blue"){
-      $( this ).toggleClass("blue")
+      var rowInt = board.playPiece(colInt);
+      var colClass = ".col-" + colInt;
+      var rowClass = ".row-" + rowInt;
+    if(board.colour == "blue"){
+      $( '.cell' + rowClass + colClass).addClass("blue")
     } else {
-      $( this ).toggleClass("red")
+      $( '.cell' + rowClass + colClass).addClass("red")
+    }
+    if(board.win == true){
+      if(board.colour == "blue"){
+        $("<div>Blue player, you are the WINNER!!!</div>").dialog();
+    }else{
+      $("<div>Red player, you are the WINNER!!!</div>").dialog();
+    }
     }
   })
 
-  if(Board.win == true){
-    alert(Board.colour + " wins!")
-  }
 
-  if(Board.win == true){
 
-    winnerString = board.colour + " wins!"
-
-    function loaded () {
-      document.getElementById("win-message").innerHTML = winnerString;
-    }
-
-    $(function() {
-    $( "#win-message" ).dialog({
-      modal: true,
-      buttons: {
-        New Game: function() {
-          Board.newGame();
-          newBoard();
-          $( this ).dialog( "close" );
-        }
-      }
-    });
-  });
-  }
 
 });
